@@ -17,5 +17,20 @@ public class amiraChain {
 		String blockchainJson = new GsonBuilder().setPrettyPrinting().create().toJson(blockchain);
 		System.out.println(blockchainJson);
 	}
+	
+	public static Boolean isChainValid() {
+		Block currentBlock;
+		Block previousBlock;
+		
+		for(int i = 1; i < blockchain.size(); i++) {
+			currentBlock = blockchain.get(i);
+			previousBlock = blockchain.get(i - 1);
+			if (!previousBlock.hash.equals(currentBlock.previousHash)) {
+				System.out.println("Previous Hashs not equal");
+				return false;
+			}
+		}
+		return true;
+	}
 
 }
